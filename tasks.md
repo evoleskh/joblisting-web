@@ -1,0 +1,4 @@
+- [x] create jobs page, jobs list, job details
+- [ ] make mock data as api so we can fetch data
+- [ ] make the job details component as server components 
+- [ ] add dark mode
