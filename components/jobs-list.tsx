@@ -3,24 +3,36 @@ import {Job} from '@/lib/types'
 import JobCard from "@/components/job-card";
 import {useState} from "react";
 import JobDetails from "@/components/job-details";
+import Link from "next/link";
 
 interface JobProps {
 	jobs: Job[];
 }
 export default function JobsList({ jobs }: JobProps) {
-	const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 	return (
-		<div className='w-full'>
-			<div className='grid grid-cols-2'>
-				<div>
-					{jobs.map((job) => (
-						<div key={job.id}>
-							<JobCard key={job.id} job={job}  onJobSelected={(job) => setSelectedJob(job)} />
-						</div>
-					))}
+		<div className='w-full h-screen overflow-y-auto'>
+			<div className="p-6 space-y-4">
+				<div className="mb-6">
+					<h2 className="text-2xl font-bold tracking-tight">
+						All Jobs
+						<span className="ml-3 text-lg font-normal text-muted-foreground">
+							({jobs.length} {jobs.length === 1 ? 'position' : 'positions'})
+						</span>
+					</h2>
 				</div>
-				<div>
-					{!selectedJob ? <h1>Select a job to view details</h1> : <JobDetails job={selectedJob} />}
+				<div className="space-y-4">
+					{jobs.length > 0 ? (
+						jobs.map((job) => (
+							<JobCard key={job.id} job={job}/>
+						))
+					) : (
+						<div className="flex flex-col items-center justify-center py-12 text-center">
+							<p className="text-lg text-muted-foreground">No jobs found</p>
+							<p className="text-sm text-muted-foreground mt-2">
+								Try adjusting your search or filters
+							</p>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
