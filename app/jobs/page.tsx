@@ -1,13 +1,14 @@
-
 import JobsListing from "@/components/jobs-list";
 import {Suspense} from "react";
 import {Job} from "@/lib/types";
 import JobDetails from "@/components/job-details";
 import { Briefcase } from "lucide-react";
+import SearchBox from "@/components/search";
 
 export default async function Jobs({searchParams}: {
-	searchParams: Promise<{ id: string }> }) {
-	const { id } = await searchParams;
+	searchParams: Promise<{ id: string, search: string }> }) {
+	const { id, search } = await searchParams;
+	console.log(search);
 	const response = await fetch(`${process.env.API_URL}/jobs`)
 	if (!response.ok) {
 		throw new Error('Failed to fetch jobs');
@@ -26,7 +27,8 @@ export default async function Jobs({searchParams}: {
 						<p className="text-muted-foreground">Loading jobs...</p>
 					</div>
 				</div>
-			}>
+			}>	
+				<SearchBox />
 				<div className='grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-screen'>
 					{/* Jobs List Panel */}
 					<div className="border-r border-border bg-muted/30">
