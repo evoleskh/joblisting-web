@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function JobDetails({ job }: { job: Job}) {
 	return (
-		<div className="bg-background sticky top-0 h-screen overflow-y-auto">
+		<div className="bg-background sticky top-0 h-screen overflow-y-auto block">
 			<div className="p-8 space-y-6">
 				{/* Company Header */}
 				<section className="space-y-4">
